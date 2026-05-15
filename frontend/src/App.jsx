@@ -3,6 +3,8 @@ import TaskForm from './components/TaskForm'
 import TaskList from './components/TaskList'
 import './App.css'
 
+const API_BASE_URL = 'http://localhost:5000'
+
 function App() {
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(false)
@@ -16,7 +18,7 @@ function App() {
   const fetchTasks = async () => {
     setLoading(true)
     try {
-      const response = await fetch('/api/tasks')
+      const response = await fetch(`${API_BASE_URL}/api/tasks`)
       const data = await response.json()
       setTasks(data)
     } catch (error) {
@@ -28,7 +30,7 @@ function App() {
 
   const handleAddTask = async (taskData) => {
     try {
-      const response = await fetch('/api/tasks', {
+      const response = await fetch(`${API_BASE_URL}/api/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(taskData)
@@ -43,7 +45,7 @@ function App() {
 
   const handleUpdateTask = async (id, updates) => {
     try {
-      const response = await fetch(`/api/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
@@ -58,7 +60,7 @@ function App() {
 
   const handleDeleteTask = async (id) => {
     try {
-      await fetch(`/api/tasks/${id}`, { method: 'DELETE' })
+      await fetch(`${API_BASE_URL}/api/tasks/${id}`, { method: 'DELETE' })
       setTasks(tasks.filter(t => t._id !== id))
     } catch (error) {
       console.error('Error deleting task:', error)
