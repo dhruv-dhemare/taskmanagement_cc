@@ -3,7 +3,7 @@ import TaskForm from './components/TaskForm'
 import TaskList from './components/TaskList'
 import './App.css'
 
-const API_BASE_URL = 'http://localhost:5000'
+const API_BASE_URL = 'http://Task-backend-env.eba-xkse2xrh.ap-south-1.elasticbeanstalk.com'
 
 function App() {
   const [tasks, setTasks] = useState([])
